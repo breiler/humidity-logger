@@ -48,11 +48,20 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
+        <!-- Avoid boiler plate code -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.8</version>
         </dependency>
+
+        <!-- Orika mapping framework -->
+        <dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+
 
         <!-- Database -->
         <dependency>

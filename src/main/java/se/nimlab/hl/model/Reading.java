@@ -9,9 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-@Entity
 @Data
-public class Log implements Serializable {
+@Entity(name="reading")
+public class Reading implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

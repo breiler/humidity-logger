@@ -4,7 +4,7 @@ databaseChangeLog:
       author: jbreiler
       changes:
         - createTable:
-            tableName: log
+            tableName: reading
             columns:
                 - column:
                     name: id
