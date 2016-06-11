@@ -3,11 +3,11 @@ package se.nimlab.hl.model;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity(name="reading")
@@ -17,9 +17,15 @@ public class Reading implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotEmpty
-    private String humidity;
+    @NotNull
+    private Double humidity;
 
-    @NotEmpty
-    private String temperature;
+    @NotNull
+    private Double temperature;
+
+    @NotNull
+    private Long deviceId;
+
+    @NotNull
+    private Date created;
 }

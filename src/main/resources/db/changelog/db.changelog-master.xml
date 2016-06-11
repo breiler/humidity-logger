@@ -1,0 +1,55 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="0001" author="joacimb">
+        <createTable tableName="reading">
+            <column name="id" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="device_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="humidity" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="temperature" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="device">
+            <column name="id" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="secret_key" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_internal_ip" type="VARCHAR(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_external_ip" type="VARCHAR(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_seen" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="reading"
+                baseColumnNames="device_id"
+                referencedColumnNames="id"
+                referencedTableName="device"
+                constraintName="fk_reading_device"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"/>
+    </changeSet>
+</databaseChangeLog>

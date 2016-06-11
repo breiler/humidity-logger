@@ -29,7 +29,7 @@ public class SwaggerConfig {
                 "API for logging humidity using IoT",
                 "1.0",
                 "",
-                "joacim.breiler@gmail.com",
+                "Joacim Breiler",
                 "GPLv3",
                 "");
     }

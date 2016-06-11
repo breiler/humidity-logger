@@ -6,14 +6,15 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class ReadingDTO {
-    private Long id;
+public class DeviceDTO {
+    private long id;
 
-    private Long deviceId;
+    private String lastInternalIp;
 
-    private Double humidity;
+    private String lastExternalIp;
 
-    private Double temperature;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss:SSS")
+    private Date lastSeen;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss:SSS")
     private Date created;
