@@ -1,4 +1,4 @@
-package se.nimlab.hl;
+package se.nimlab.hl.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

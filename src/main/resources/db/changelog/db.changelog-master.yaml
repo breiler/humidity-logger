@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: jbreiler
+      changes:
+        - createTable:
+            tableName: log
+            columns:
+                - column:
+                    name: id
+                    type: int
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: humidity
+                    type: varchar(15)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: temperature
+                    type: varchar(15)
+                    constraints:
+                      nullable: false
