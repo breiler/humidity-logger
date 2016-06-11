@@ -2,11 +2,16 @@ package se.nimlab.hl;
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@Controller
+@Configuration
 @EnableAutoConfiguration
+@ComponentScan
+@EnableSwagger2
 public class ApplicationController {
 
     @RequestMapping("/")
