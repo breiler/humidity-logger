@@ -28,10 +28,9 @@ public class ReadingRepositoryImpl implements ReadingRepositoryCustom {
                     "WHERE\n" +
                     "  created > :from AND\n" +
                     "  created < :to AND\n" +
-                    "  device_id < :deviceId\n" +
+                    "  device_id = :deviceId\n" +
                     "GROUP BY\n" +
-                    "  TO_CHAR(created, 'yyyy-mm-dd hh24') || ':00:00',\n" +
-                    "  device_id\n" +
+                    "  TO_CHAR(created, 'yyyy-mm-dd hh24') || ':00:00'\n" +
                     "ORDER BY created DESC";
 
     private static final String SEARCH_ALL =
@@ -43,9 +42,9 @@ public class ReadingRepositoryImpl implements ReadingRepositoryCustom {
     @Transactional(readOnly = true)
     public List<Reading> getStatisticsReadingsByTheHour(Long deviceId, Date from, Date to) {
         Map<String, Object> queryParams = new HashMap<>();
-        queryParams.put("deviceId", deviceId);
         queryParams.put("from", from);
         queryParams.put("to", to);
+        queryParams.put("deviceId", deviceId);
 
         return jdbcTemplate.query(SEARCH_BY_THE_HOUR,
                 queryParams,

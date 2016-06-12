@@ -81,7 +81,7 @@ public class ReadingController {
         return results;
     }
 
-    @RequestMapping(value = "/devices/{deviceId}/readings/statisics-hourly.json", method = RequestMethod.GET, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/devices/{deviceId}/readings/statistics-hourly.json", method = RequestMethod.GET, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     @ApiOperation(value = "Get all sensor readings by the hour",
             notes = "Registers a new sensor reading",
             responseContainer = "List",
