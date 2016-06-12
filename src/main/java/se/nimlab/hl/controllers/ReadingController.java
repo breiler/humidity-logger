@@ -16,6 +16,8 @@ import se.nimlab.hl.model.Reading;
 import se.nimlab.hl.repository.DeviceRepository;
 import se.nimlab.hl.repository.ReadingRepository;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -71,11 +73,30 @@ public class ReadingController {
             @ApiResponse(code = 200, message = "The registered readings")
     })
     public List<ReadingDTO> getReadings(
-            @ApiParam(value = "The device to register the readings to", required = true)
+            @ApiParam(value = "The device to get readings from", required = true)
             @PathVariable(value = "deviceId")
             Long deviceId) {
         List<ReadingDTO> results = new ArrayList<>();
         mapperFacade.mapAsCollection(readingRepository.findByDeviceId(deviceId), results, ReadingDTO.class);
+        return results;
+    }
+
+    @RequestMapping(value = "/devices/{deviceId}/readings/statisics-hourly.json", method = RequestMethod.GET, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
+    @ApiOperation(value = "Get all sensor readings by the hour",
+            notes = "Registers a new sensor reading",
+            responseContainer = "List",
+            response = ReadingDTO.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The registered readings")
+    })
+    public List<ReadingDTO> getStatisticsHourly(
+            @ApiParam(value = "The device to register the readings to", required = true)
+            @PathVariable(value = "deviceId")
+            Long deviceId) {
+        List<ReadingDTO> results = new ArrayList<>();
+        LocalDateTime to = LocalDateTime.now();
+        LocalDateTime from = LocalDateTime.now().minusDays(1);
+        mapperFacade.mapAsCollection(readingRepository.getStatisticsReadingsByTheHour(deviceId, Date.from(from.atZone(ZoneId.systemDefault()).toInstant()), Date.from(to.atZone(ZoneId.systemDefault()).toInstant())), results, ReadingDTO.class);
         return results;
     }
 
