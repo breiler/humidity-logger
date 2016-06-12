@@ -3,11 +3,6 @@ package se.nimlab.hl.mapper;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.springframework.stereotype.Component;
-import se.nimlab.hl.contract.CreateDeviceDTO;
-import se.nimlab.hl.contract.DeviceDTO;
-import se.nimlab.hl.contract.ReadingDTO;
-import se.nimlab.hl.model.Device;
-import se.nimlab.hl.model.Reading;
 
 @Component
 public class BeanMapper extends ConfigurableMapper {

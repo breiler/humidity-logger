@@ -1,5 +1,7 @@
 package se.nimlab.hl.controllers;
 
+import se.nimlab.hl.contract.CreateReadingDTO;
+import se.nimlab.hl.repository.DeviceRepository;
 import io.swagger.annotations.*;
 import lombok.extern.log4j.Log4j;
 import ma.glasnost.orika.MapperFacade;
@@ -9,11 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
-import se.nimlab.hl.contract.CreateReadingDTO;
 import se.nimlab.hl.contract.ReadingDTO;
 import se.nimlab.hl.model.Device;
 import se.nimlab.hl.model.Reading;
-import se.nimlab.hl.repository.DeviceRepository;
 import se.nimlab.hl.repository.ReadingRepository;
 
 import java.time.LocalDateTime;
