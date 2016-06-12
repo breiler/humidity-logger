@@ -30,7 +30,7 @@ public class ReadingRepositoryImpl implements ReadingRepositoryCustom {
                     "  created < :to AND\n" +
                     "  device_id = :deviceId\n" +
                     "GROUP BY\n" +
-                    "  TO_CHAR(created, 'yyyy-mm-dd hh24') || ':00:00'\n" +
+                    "  TO_CHAR(created, 'yyyy-mm-dd hh24') || ':00:00', device_id\n" +
                     "ORDER BY created DESC";
 
     private static final String SEARCH_ALL =
