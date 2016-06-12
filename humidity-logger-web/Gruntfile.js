@@ -7,14 +7,14 @@ module.exports = function(grunt) {
       build: {
         cwd: 'src/main/resources/public',
         src: [ '**' ],
-        dest: 'target',
+        dest: 'target/classes/public',
         expand: true
       },
       build_vendor_assets: {
         files: [
           {
             src: ['bower_components/bootstrap/dist/css/bootstrap.min.css', '!**/*.md'],
-            dest: 'target/css',
+            dest: 'target/classes/public/css',
             cwd: '.',
             expand: true,
             flatten: true
@@ -31,9 +31,9 @@ module.exports = function(grunt) {
       core: {
         files: [{
           expand: true,
-          cwd: 'target',
+          cwd: 'target/classes/public',
           src: ['js/**/*.js', 'libs/**/*.js'],
-          dest: "target",
+          dest: "target/classes/public",
           ext: '.min.js'
         }]
       }
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
         options: {
           install: true,
           copy: true,
-          targetDir: 'target/libs',
+          targetDir: 'target/classes/public/libs',
           cleanTargetDir: true,
           expand: true
         }
@@ -72,7 +72,7 @@ module.exports = function(grunt) {
         open: true,
         base: [
           '.tmp',
-          'target'
+          'target/classes/public'
         ],
         middleware: function (connect, options) {
           var middlewares = [];
