@@ -1,7 +1,9 @@
 {
-  "name": "master",
-  "scripts": {},
-  "env": {},
+  "name": "humidity-logger",
+  "scripts": {
+  },
+  "env": {
+  },
   "formation": {
     "web": {
       "quantity": 1
