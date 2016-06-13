@@ -13,11 +13,17 @@ module.exports = function(grunt) {
       build_vendor_assets: {
         files: [
           {
-            src: ['bower_components/bootstrap/dist/css/bootstrap.min.css', '!**/*.md'],
+            src: ['bower_components/bootstrap/dist/css/bootstrap.min.css', 'bower_components/angular-chart.js/dist/angular-chart.css'],
             dest: 'target/classes/public/css',
             cwd: '.',
             expand: true,
             flatten: true
+          },
+          {
+              expand: true,
+              cwd: 'target/classes/public',
+              src: ['js/**/*.js', 'libs/**/*.js'],
+              dest: "target/classes/public",
           }
       ]
     },
@@ -26,17 +32,6 @@ module.exports = function(grunt) {
       build: {
         src: [ 'target' ]
       },
-    },
-    uglify: {
-      core: {
-        files: [{
-          expand: true,
-          cwd: 'target/classes/public',
-          src: ['js/**/*.js', 'libs/**/*.js'],
-          dest: "target/classes/public",
-          ext: '.min.js'
-        }]
-      }
     },
     bower: {
       install: {
@@ -98,7 +93,7 @@ module.exports = function(grunt) {
 	watch: {
       copy: {
         files: [ 'src/main/resources/public/**' ],
-        tasks: [ 'copy', 'uglify' ]
+        tasks: [ 'copy' ]
       }
     }
   });
@@ -113,5 +108,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
 
   grunt.registerTask('serve', ['default', 'configureProxies:server', 'connect:livereload', 'watch']);
-  grunt.registerTask('default', ['clean', 'bower', 'copy', 'uglify']);
+  grunt.registerTask('default', ['clean', 'bower', 'copy']);
 };

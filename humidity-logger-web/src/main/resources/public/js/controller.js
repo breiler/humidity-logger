@@ -1,20 +1,41 @@
-app.controller('usersController', function($scope) {
-    $scope.headingTitle = "User List";
-});
+app.controller('devicesController', function($scope, $http, $routeParams) {
+    $scope.devices = [];
+    $scope.selectedDevice = null;
 
-app.controller('rolesController', function($scope) {
-    $scope.headingTitle = "Roles List";
-});
+    $scope.setSelected = function(device) {
+       $scope.selectedDevice = device;
+    };
 
-app.controller('statisticsController', function($scope) {
-    $scope.headingTitle = "Statistics";
-      $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-      $scope.series = ['Series A', 'Series B'];
-      $scope.data = [
-        [65, 59, 80, 81, 56, 55, 40],
-        [28, 48, 40, 19, 86, 27, 90]
-      ];
-      $scope.onClick = function (points, evt) {
-        console.log(points, evt);
-      };
+    $http.get('/devices').success(function (devices, status, headers, config) {
+        $scope.devices = devices;
+        angular.forEach(devices, function(device) {
+            $http.get('/devices/' + device.id + "/readings")
+                .success(function (readings, status, headers, config) {
+                    device.chart = {
+                        series: ['Humidity', 'Temperature'],
+                        labels: readings.map(function(reading) {
+                            return reading.created;
+                        }),
+                        data: [
+                            readings.map(function(reading) {
+                              return reading.humidity;
+                            }),
+                            readings.map(function(reading) {
+                              return reading.temperature;
+                            })
+                        ]
+                    };
+                })
+                .error(function (data, status, headers, config) {
+                    $scope.errorMessage = "Can't retrieve devices " + data;
+                    return null;
+                });
+        });
+
+        if( $scope.selectedDevice == null && $scope.devices.length > 0) {
+            $scope.selectedDevice = $scope.devices[0];
+        }
+    }).error(function (data, status, headers, config) {
+        $scope.errorMessage = "Can't retrieve devices " + data;
+    });
 });
