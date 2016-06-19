@@ -1,6 +1,7 @@
 package se.nimlab.hl.controllers;
 
 import se.nimlab.hl.contract.CreateReadingDTO;
+import se.nimlab.hl.contract.DeviceDTO;
 import se.nimlab.hl.repository.DeviceRepository;
 import io.swagger.annotations.*;
 import lombok.extern.log4j.Log4j;
@@ -16,6 +17,7 @@ import se.nimlab.hl.model.Device;
 import se.nimlab.hl.model.Reading;
 import se.nimlab.hl.repository.ReadingRepository;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -39,6 +41,9 @@ public class ReadingController {
     @Autowired
     private MapperFacade mapperFacade;
 
+    @Autowired
+    private HttpServletRequest context;
+
     @RequestMapping(value = "/devices/{deviceId}/readings", method = RequestMethod.POST, consumes = {MimeTypeUtils.APPLICATION_JSON_VALUE}, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     @ApiOperation(value = "Registers a new sensor reading",
             notes = "Registers a new sensor reading")
@@ -58,6 +63,12 @@ public class ReadingController {
             return new ResponseEntity(null, HttpStatus.UNAUTHORIZED);
         }
 
+        // Update device info
+        device.setLastSeen(new Date());
+        device.setLastExternalIp(context.getRemoteAddr());
+        deviceRepository.save(device);
+
+        // Add reading
         Reading reading = mapperFacade.map(readingDTO, Reading.class);
         reading.setDeviceId(deviceId);
         reading.setCreated(new Date());
