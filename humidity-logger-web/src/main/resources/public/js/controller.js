@@ -9,7 +9,7 @@ app.controller('devicesController', function($scope, $http, $routeParams) {
     $http.get('/devices').success(function (devices, status, headers, config) {
         $scope.devices = devices;
         angular.forEach(devices, function(device) {
-            $http.get('/devices/' + device.id + "/readings")
+            $http.get('/devices/' + device.id + "/readings/statistics-hourly.json")
                 .success(function (readings, status, headers, config) {
                     device.chart = {
                         series: ['Humidity', 'Temperature'],
