@@ -31,7 +31,7 @@ public class ReadingRepositoryImpl implements ReadingRepositoryCustom {
                     "  device_id = :deviceId\n" +
                     "GROUP BY\n" +
                     "  TO_CHAR(created, 'yyyy-mm-dd hh24') || ':00:00', device_id\n" +
-                    "ORDER BY created DESC";
+                    "ORDER BY created ASC";
 
     private static final String SEARCH_ALL =
             "SELECT * FROM reading ORDER BY created DESC";
