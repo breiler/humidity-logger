@@ -18,3 +18,7 @@ humidity-logger-web/humidity-logger-web.iml
 humidity-logger-web/target/
 humidity-logger.iml
 
+humidity-logger-api/target/
+humidity-logger-web/bower_components/
+humidity-logger-web/node_modules/
+
